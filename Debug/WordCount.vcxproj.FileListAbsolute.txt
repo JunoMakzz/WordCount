@@ -1,0 +1,2 @@
+E:\VisualStudioWork\WordCount\Debug\WordCount.exe
+E:\VisualStudioWork\WordCount\Debug\WordCount.pdb

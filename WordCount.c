@@ -21,7 +21,7 @@ void CountChar(char filetext[100])//字符计数函数
 		printf("文件打开失败或者文件不存在!\n");
 		exit(0);
 	}
-	while (getc(fp) != EOF)
+	while (fgetc(fp) != EOF)
 	{
 		count++;
 	}
@@ -34,19 +34,25 @@ void CountWord(char filetext[100])
 {
 	int count = 0;
 	char c;
+	int flag = 0;
 	FILE* fp = fopen(filetext, "r");
 	if (fp == NULL)
 	{
 		printf("文件打开失败或者文件不存在!\n");
 		exit(0);
 	}
-	while (!feof(fp))
+	while ((c = fgetc(fp))!= EOF)
 	{
-		c = fgetc(fp);
-		if (c == ' ' || c == ',')//空格和逗号分隔开的视为单词
+		if (flag == 0 && c != ' ' && c != ',')
+		{
+			flag = 1;
 			count++;
+		}
+		if (flag == 1 && (c == ' ' || c == ',' || c == '\t' || c == '\n'))
+			flag = 0;
+
 	}
-	printf("单词数: %d", count + 1);
+	printf("单词数: %d", count);
 	printf("\n");
 	fclose(fp);
 }
